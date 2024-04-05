@@ -1,0 +1,24 @@
+name: Unit tests
+
+on: [pull_request]
+
+jobs:
+  unit-tests:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: ubuntu-latest
+        python-version: [3.8, 3.9, 3.10, 3.11, 3.12]
+    name: Unit tests on ${{ matrix.os }} with Python ${{ matrix.python-version }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Run pytest
+        shell: bash -l {0}
+        run: |
+          pip install pytest
+          pytest -v tests/test_irods_rename.py
