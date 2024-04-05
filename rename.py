@@ -21,7 +21,12 @@ def get_list_of_files(directory):
 
     """
     logging.info(f"Getting list of files in {directory}")
-    return [f for f in directory.iterdir() if f.is_file()]
+    # recursively search for files and list relative paths
+    list_of_files_and_dirs = list(directory.rglob("*"))
+    trimmed_list_of_files = [
+        f.relative_to(directory) for f in list_of_files_and_dirs if f.is_file()
+    ]
+    return trimmed_list_of_files
 
 
 def check_which_files_need_rename(list_of_files, rename_sheet):
@@ -50,6 +55,8 @@ def check_which_files_need_rename(list_of_files, rename_sheet):
         lines = f.readlines()
     logging.info(f"Checking which files need to be renamed")
     rename_dict = {}
+    logging.info(f"Converting list_of_files to Path objects")
+    list_of_files = [Path(f) for f in list_of_files]
     for line in lines:
         original_filename, new_filename = line.strip().split(",")
         logging.info(f"{original_filename} -> {new_filename}")
