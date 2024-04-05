@@ -222,22 +222,15 @@ def rename_files(output_directory, rename_decision_per_file):
 
 def main(args):
     list_of_input_files = get_list_of_files(args.input)
+    logging.info(f"Found files {list_of_input_files}")
     rename_decision_per_file = check_which_files_need_rename(
         list_of_input_files, args.rename_sheet
     )
+    check_validity_of_rename_decision(rename_decision_per_file)
+    create_output_directory(args.input, args.output)
     logging.info(f"Copying files to {args.output}")
-    for file in list_of_input_files:
-        logging.info(f"Copying {file.name}")
-        new_filename = rename_decision_per_file.get(file.name, None)
-        logging.info(f"New filename: {new_filename}")
-        if new_filename != None:
-            logging.info(f"Copying {file.name} to {new_filename}")
-            output_filepath = Path(args.output) / new_filename
-            shutil.copy(file, output_filepath)
-        else:
-            logging.info(f"Copying {file.name} to {file.name}")
-            output_filepath = Path(args.output) / file.name
-            shutil.copy(file, output_filepath)
+    rename_files(args.output, rename_decision_per_file)
+
     logging.info(f"Finished copying files to {args.output}")
 
 
@@ -251,5 +244,7 @@ if __name__ == "__main__":
     parser.add_argument("rename_sheet", help="Rename sheet", type=Path)
 
     args = parser.parse_args()
+
+    logging.basicConfig(level=logging.INFO)
 
     main(args)
