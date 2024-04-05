@@ -3,6 +3,7 @@
 from pathlib import Path
 import shutil
 import logging
+from version import __version__
 
 
 def get_list_of_files(directory):
@@ -242,6 +243,9 @@ if __name__ == "__main__":
     parser.add_argument("input", help="Input directory", type=Path)
     parser.add_argument("output", help="Output directory", type=Path)
     parser.add_argument("rename_sheet", help="Rename sheet", type=Path)
+    parser.add_argument(
+        "--version", action="version", version=f"%(prog)s {__version__}"
+    )
 
     args = parser.parse_args()
 
