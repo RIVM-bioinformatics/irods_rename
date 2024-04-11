@@ -76,6 +76,7 @@ class TestRename(unittest.TestCase):
     @classmethod
     def tearDownClass(cls):
         shutil.rmtree("testdir")
+        shutil.rmtree("testdir_renamed")
         shutil.rmtree("test_sheets")
 
     def test_010_get_list_of_files(self):
@@ -205,7 +206,7 @@ class TestRename(unittest.TestCase):
         rename_dict = {
             "dir1/file1.txt": "dir1/file1_new.txt",
             "dir1/file2.txt": "dir1/file2_new.txt",
-            "dir2/file3.txt": "dir2/file3_new.txt",
+            "dir2/file3.txt": "dir2/new_dir/file3_new.txt",
             "dir3/file4.txt": "dir3/file4_new.txt",
         }
         input_dir = Path("testdir")
