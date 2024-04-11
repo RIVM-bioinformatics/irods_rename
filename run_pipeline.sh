@@ -26,7 +26,8 @@ if [ ! -z "${irods_input_sequencing__run_id}" ] && [ -f "/data/BioGrid/NGSlab/sa
 then
   RENAME_FILE="/data/BioGrid/NGSlab/sample_sheets/${irods_input_sequencing__run_id}.rename"
 else
-  # exit here if the rename file does not exist
+  echo "No rename file found for run ${irods_input_sequencing__run_id}"
+  exit 1
 fi
 
 if [ ! -d "${INPUTDIR}" ] || [ ! -d "${OUTPUTDIR}" ]
