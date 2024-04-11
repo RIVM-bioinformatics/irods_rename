@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.0](https://github.com/boasvdp/irods_rename/compare/v0.1.0...v0.2.0) (2024-04-11)
+
+
+### Features
+
+* make parent dir of new file ([2b28e6a](https://github.com/boasvdp/irods_rename/commit/2b28e6a5bf717231e1ca5bc993f05085195c1c44))
+
 ## 0.1.0 (2024-04-05)
 
 
