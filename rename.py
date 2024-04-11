@@ -217,6 +217,7 @@ def rename_files(output_directory, rename_decision_per_file):
     for old_filename, new_filename in rename_decision_per_file.items():
         old_filepath = output_directory / old_filename
         new_filepath = output_directory / new_filename
+        new_filepath.parent.mkdir(parents=True, exist_ok=True)
         logging.info(f"Renaming {old_filepath} to {new_filepath}")
         old_filepath.rename(new_filepath)
 
