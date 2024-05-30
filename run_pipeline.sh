@@ -9,6 +9,7 @@ PROJECT_NAME="${irods_input_projectID}" # This should be an environment variable
 
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" > /dev/null 2>&1 && pwd )"
 cd ${DIR}
+echo "Current directory: ${DIR}"
 
 # Sanity checks
 if [ ! -z "${1}" ] || [ ! -z "${2}" ] || [ ! -z "${irods_input_projectID}" ]
@@ -16,6 +17,9 @@ then
   INPUTDIR="${1}"
   OUTPUTDIR="${2}"
   PROJECT_NAME="${irods_input_projectID}"
+  echo "Input dir: ${INPUTDIR}"
+  echo "Output dir: ${OUTPUTDIR}"
+  echo "Project name: ${PROJECT_NAME}"
 else
   echo "No inputdir, outputdir or project name (param 1, 2, irods_input_projectID)"
   exit 1
@@ -25,6 +29,7 @@ fi
 if [ ! -z "${irods_input_sequencing__run_id}" ] && [ -f "/data/BioGrid/NGSlab/sample_sheets/${irods_input_sequencing__run_id}.rename" ]
 then
   RENAME_FILE="/data/BioGrid/NGSlab/sample_sheets/${irods_input_sequencing__run_id}.rename"
+  echo "Rename file found for run ${irods_input_sequencing__run_id}: ${RENAME_FILE}"
 else
   echo "No rename file found for run ${irods_input_sequencing__run_id}"
   exit 1
