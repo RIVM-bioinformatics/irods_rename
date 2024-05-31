@@ -190,12 +190,12 @@ def create_output_directory(input_directory, output_directory):
     None
 
     """
-    if output_directory.exists():
-        logging.info(
-            f"Output directory {output_directory} already exists, removing before copying"
-        )
-        shutil.rmtree(output_directory)
-    shutil.copytree(input_directory, output_directory)
+    # if output_directory.exists():
+    #     logging.info(
+    #         f"Output directory {output_directory} already exists, removing before copying"
+    #     )
+    #     shutil.rmtree(output_directory)
+    shutil.copytree(input_directory, output_directory, dirs_exist_ok=True)
 
 
 def rename_files(output_directory, rename_decision_per_file):
