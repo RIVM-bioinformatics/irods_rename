@@ -2,6 +2,7 @@
 
 from pathlib import Path
 import shutil
+import subprocess
 import logging
 from version import __version__
 
@@ -195,7 +196,8 @@ def create_output_directory(input_directory, output_directory):
     #         f"Output directory {output_directory} already exists, removing before copying"
     #     )
     #     shutil.rmtree(output_directory)
-    shutil.copytree(input_directory, output_directory, dirs_exist_ok=True)
+    # shutil.copytree(input_directory, output_directory, dirs_exist_ok=True)
+    subprocess.run(["cp", "-r", input_directory, output_directory])
 
 
 def rename_files(output_directory, rename_decision_per_file):
