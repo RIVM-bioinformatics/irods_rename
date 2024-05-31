@@ -198,6 +198,7 @@ def create_output_directory(input_directory, output_directory):
     #     shutil.rmtree(output_directory)
     # shutil.copytree(input_directory, output_directory, dirs_exist_ok=True)
     # use glob of input directory to copy files
+    output_directory.mkdir(parents=True, exist_ok=True)
     subprocess.run(["cp", "-r", f"{str(input_directory)}/*", str(output_directory)])
 
 
