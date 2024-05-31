@@ -199,7 +199,9 @@ def create_output_directory(input_directory, output_directory):
     # shutil.copytree(input_directory, output_directory, dirs_exist_ok=True)
     # use glob of input directory to copy files
     output_directory.mkdir(parents=True, exist_ok=True)
-    subprocess.run(["cp", "-r", f"{str(input_directory)}/*", str(output_directory)])
+    cmd = " ".join(["cp", "-r", f"{str(input_directory)}/*", str(output_directory)])
+    logging.info(f"Running command: {cmd}")
+    subprocess.run(cmd, check=True, shell=True)
 
 
 def rename_files(output_directory, rename_decision_per_file):
